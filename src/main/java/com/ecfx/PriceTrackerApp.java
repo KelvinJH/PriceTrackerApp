@@ -120,7 +120,11 @@ public class PriceTrackerApp {
             // page = Jsoup.parse(captchaPage);
 
             CaptchaResponse response = CaptchaService.solveCaptcha(AMAZON_IPADTEN_URL);
-            System.err.println(response.getUrl());
+
+            if (response.getUrl().contains("error")) {
+                return new PriceLog(new BigDecimal(Integer.MAX_VALUE), getFormattedTimestamp());
+            }
+
             if (response.getValidationStatus()) {
                 page = Jsoup.connect(response.getUrl())
                     .cookies(convertCookiesToMap(response.getCookies()))
@@ -130,11 +134,11 @@ public class PriceTrackerApp {
         }
         
         Element centerDiv = page.selectFirst("div#centerCol.centerColAlign");
-        // We have the center div. Now within that center div, we want the div that shows price
 
+        // We have the center div. Now within that center div, we want the div that shows price
         if (centerDiv == null) {
             System.out.println("Center div was not found on page");
-            //log into exceptions
+            
         }
 
         // We want to find the priceDisplay within the center column rather than the whole page because
