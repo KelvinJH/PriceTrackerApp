@@ -33,7 +33,7 @@ At the time of this discovery, the only dependency that this project had was JSo
 the redirected URL along with the cookies which was then passed through the JSoup connect method. Although this implementation works, the problem that comes along with this implementation is the requirement of human input. A possible improvement to this project would be 
 leveraging some captcha solving services or machine learning algorithms that are trained to recognize patterns in captcha images. Adding either of those technologies would remove the need to solve a captcha every interval of scraping.
 
-## Testing
+## Testing
 As with any code testing was done to ensure that it met the requirements. As mentioned above, for early testing, I stored a copy of the iPad product page locally in form of an html file that will be included in the source code. Leveraging that html file, I familiarized myself 
 with the content of the product page so identify the best way to grab the price. Another html file that can be found in the source code is a replica of the captcha page. For similar reasons, I leveraged the captcha page to test captcha solving with selenium. When that worked as expected,
 I moved onto testing by connecting to the actual page on the web. Lastly, I had to test the pop-up notification by fiddling with the log file. This can be done by changing the last scraped price, which is stored in a local text file, to be greater than the price on the actual product page.
