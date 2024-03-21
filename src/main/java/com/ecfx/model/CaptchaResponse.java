@@ -12,13 +12,15 @@ public class CaptchaResponse {
         this.isValidated = isValidated;
     }
 
-    public CaptchaResponse(boolean isValidated) {
+    public CaptchaResponse(String html, boolean isValidated) {
+        this.html = html;
         this.isValidated = isValidated;
     }
 
     private Set<Cookie> cookies;
     private String redirectUrl;
     private boolean isValidated;
+    private String html;
     
     public Set<Cookie> getCookies() {
         return cookies;
@@ -30,5 +32,9 @@ public class CaptchaResponse {
 
     public boolean getValidationStatus() {
         return isValidated;
+    }
+
+    public String getHTML() {
+        return html;
     }
 }

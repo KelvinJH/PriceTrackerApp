@@ -32,7 +32,7 @@ public class CaptchaService {
             return new CaptchaResponse(driver.manage().getCookies(), driver.getCurrentUrl(), true);
         } catch (NoSuchElementException ex) {
             // Captcha field was not found - We don't need to authenticate
-            return new CaptchaResponse(true);
+            return new CaptchaResponse(driver.getPageSource(), true);
         } finally {
             driver.quit();
         }

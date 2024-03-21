@@ -121,15 +121,19 @@ public class PriceTrackerApp {
 
             CaptchaResponse response = CaptchaService.solveCaptcha(AMAZON_IPADTEN_URL);
 
-            if (response.getUrl().contains("error")) {
+            if (response.getUrl() != null && response.getUrl().contains("error")) {
                 return new PriceLog(new BigDecimal(Integer.MAX_VALUE), getFormattedTimestamp());
             }
 
             if (response.getValidationStatus()) {
-                page = Jsoup.connect(response.getUrl())
+                if (response.getUrl() != null && !response.getCookies().isEmpty()) {
+                    page = Jsoup.connect(response.getUrl())
                     .cookies(convertCookiesToMap(response.getCookies()))
                     .userAgent(USER_AGENT)
                     .get();
+                } else {
+                    page = Jsoup.parse(response.getHTML());
+                }
             }
         }
         
